@@ -1,0 +1,8 @@
+public/ klasörüne şu üç dosyayı koy:
+
+  kays.png    → açık temada sol menü ve giriş ekranı logosu
+  kays1.png   → karanlık temada logo + telefon önizlemelerindeki uygulama ikonu
+  icon.png    → tarayıcı sekmesi ikonu (favicon)
+
+Kare, şeffaf arka planlı PNG önerilir (256x256 veya 512x512).
+Dosyalar yoksa uygulama hata vermez; logo alanı boş görünür.

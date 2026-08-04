@@ -1,0 +1,8 @@
+Logo dosyalarını buraya koy:
+
+  public/kays.png   → AÇIK temada gösterilir
+  public/kays1.png  → KARANLIK temada gösterilir
+
+Kare (ör. 128x128 veya 256x256), şeffaf arka planlı PNG olsun.
+Nav.tsx bu iki dosyayı arıyor; tema değişince CSS ile anında değişiyor.
+Dosyalar yoksa logo alanı boş görünür (hata vermez).

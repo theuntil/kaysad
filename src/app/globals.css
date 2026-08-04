@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TEMA V3.1 — TAM SİYAH KARANLIK + APPLE HİSSİ
+
+   Karanlık tema artık gerçekten siyah (#000). Yüzeyler siyahın üstüne
+   çok az açılıyor (#0A0A0B, #161618) — Apple'ın yaptığı gibi: katmanlar
+   renkle değil, ışıkla ayrışıyor. Kenarlıklar ince ve düşük kontrastlı.
+
+   ★ BUTON RENGİ: birincil buton BEYAZ (karanlıkta) / SİYAH (açıkta).
+     #A0E970 ikincil vurgu rengi — seçili durum, sayaç, grafik, ikon.
+     Böylece arayüz "yeşil tema" gibi görünmüyor.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: dark;
+
+  --c-bg:       0 0 0;          /* tam siyah */
+  --c-surface:  10 10 11;
+  --c-raised:   22 22 24;
+  --c-border:   38 38 42;
+  --c-hairline: 28 28 31;
+  --c-text:     245 245 247;
+  --c-muted:    150 150 157;
+  --c-faint:    105 105 113;
+
+  /* ★ VURGU = BEYAZ. Yeşil tamamen kaldırıldı: seçili sekme, sayaç,
+     grafik ve buton — hepsi beyaz/nötr. Renk sadece DURUM anlatır
+     (kırmızı hata, sarı uyarı, mavi bilgi). */
+  --c-accent:   245 245 247;
+  --c-accentD:  225 225 230;
+
+  /* Birincil buton */
+  --c-primary:     255 255 255;
+  --c-on-primary:  0 0 0;
+
+  --c-info:     10 132 255;
+  --c-warn:     255 159 10;
+  --c-danger:   255 69 58;
+  --c-promo:    191 90 242;
+
+  --c-white:    255 255 255;
+  --c-on-accent: 0 0 0;
+
+  --shadow-strength: 0.55;
+  --blur-bg: rgb(10 10 11 / 0.72);
+}
+
+html.light {
+  color-scheme: light;
+
+  --c-bg:       242 242 247;
+  --c-surface:  255 255 255;
+  --c-raised:   247 247 250;
+  --c-border:   214 214 220;
+  --c-hairline: 229 229 234;
+  --c-text:     17 17 19;
+  --c-muted:    99 99 107;
+  --c-faint:    142 142 147;
+
+  /* Açık temada vurgu = koyu nötr */
+  --c-accent:   17 17 19;
+  --c-accentD:  0 0 0;
+
+  /* Açık temada beyaz buton görünmez — siyaha dönüyor */
+  --c-primary:     17 17 19;
+  --c-on-primary:  255 255 255;
+
+  --c-info:     0 113 227;
+  --c-warn:     181 84 0;
+  --c-danger:   215 45 38;
+  --c-promo:    148 61 200;
+
+  --c-white:    17 17 20;
+  --c-on-accent: 255 255 255;
+
+  --shadow-strength: 0.10;
+  --blur-bg: rgb(255 255 255 / 0.78);
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background-color: rgb(var(--c-bg));
+  color: rgb(var(--c-text));
+}
+
+body {
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { letter-spacing: -0.022em; }
+
+/* Yapışkan başlıklarda cam efekti */
+.glass {
+  background-color: var(--blur-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-border));
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-faint));
+  background-clip: content-box;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--c-accent));
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* iOS'ta 16px altı inputlar sayfayı zoom'lar — mobilde büyütüyoruz */
+@media (max-width: 640px) {
+  input, select, textarea { font-size: 16px !important; }
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7); cursor: pointer;
+}
+html.light input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.35);
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23969699' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  background-size: 1.05em;
+  appearance: none;
+  padding-right: 2.2rem;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-fade-up { animation: fadeUp 0.24s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+.animate-pulse-soft { animation: pulseSoft 1.6s ease-in-out infinite; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in { animation: slideIn 0.26s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+html.theme-anim body,
+html.theme-anim body * {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.sticky-head th {
+  position: sticky; top: 0; z-index: 1;
+  background-color: rgb(var(--c-surface));
+}
+
+/* Mobilde yatay kaydırmada çubuk gizlensin */
+.scroll-hint { -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.scroll-hint::-webkit-scrollbar { display: none; }
+
+/* ═══════════════ LOGO TEMA SEÇİMİ ═══════════════
+   public/kays1.png karanlıkta, public/kays.png açıkta gösterilir.
+   JS beklemeden CSS ile seçiliyor; tema değişince anında değişir. */
+html.light [data-light-logo] { display: block !important; }
+html.light [data-light-logo] + img,
+html.light img[src="/kays1.png"] { display: none !important; }
